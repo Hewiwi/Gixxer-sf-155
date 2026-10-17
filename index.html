@@ -1,0 +1,980 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Case for the Suzuki GIXXER SF 155</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #070809;
+  --panel: #101214;
+  --panel2: #171a1d;
+  --ink: #f2f3f4;
+  --muted: #969da3;
+  --line: #292d31;
+  --accent: #c6cbd0;
+  --accentInk: #0b0c0d;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.app { min-height: 100vh; background: var(--bg); }
+a { color: inherit; }
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 14px max(24px, calc((100vw - 1112px)/2));
+  gap: 18px;
+  background: rgba(7,8,9,.82);
+  border-bottom: 1px solid rgba(198,203,208,.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 30px #0002;
+  transition: background .25s ease, box-shadow .25s ease,
+    padding .25s ease;
+}
+.nav.scrolled {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background: rgba(7,8,9,.94);
+  box-shadow: 0 10px 32px #0008;
+  border-bottom-color: rgba(198,203,208,.24);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  transition: transform .25s ease;
+}
+.brand:hover { transform: translateY(-1px); }
+.mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  background: var(--accent);
+  color: var(--accentInk);
+  font-size: 14px;
+  transform: skew(-8deg);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.brand:hover .mark {
+  transform: skew(-8deg) rotate(-5deg);
+  box-shadow: 0 0 20px #c6cbd033;
+}
+.nav a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: 20px;
+  padding: 9px 11px;
+  border-radius: 5px;
+  transition: color .22s ease, background .22s ease,
+    transform .22s ease;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav a:hover, .nav a:focus-visible, .nav a.active {
+  color: var(--ink);
+  background: #ffffff0a;
+}
+.nav a:hover { transform: translateY(-1px); }
+.nav a:hover::after, .nav a:focus-visible::after,
+.nav a.active::after { transform: scaleX(1); }
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left center;
+  transition: transform .08s linear;
+  box-shadow: 0 0 12px #c6cbd055;
+}
+
+.hero, section .section-head, .card, .panel, .spec, .stat,
+.price-card, .promise {
+  transition: transform .35s ease, border-color .35s ease,
+    box-shadow .35s ease;
+}
+.card:hover, .spec:hover, .stat:hover {
+  transform: translateY(-4px);
+  border-color: #62696f;
+  box-shadow: 0 14px 30px #0003;
+}
+.feature-card img {
+  transition: transform .5s ease, filter .5s ease;
+}
+.feature-card:hover img {
+  transform: scale(1.035);
+  filter: grayscale(0) contrast(1.08);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .65s ease,
+    transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+section[id], #why { scroll-margin-top: 88px; }
+.wrap { max-width: 1160px; margin: auto; padding: 0 24px; }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: center;
+  padding-top: 42px;
+  padding-bottom: 76px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--muted);
+}
+.pip {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+h1 {
+  font-size: clamp(42px,7vw,82px);
+  line-height: .94;
+  letter-spacing: -.07em;
+  margin: 22px 0;
+  max-width: 700px;
+}
+h1 span { color: #c6cbd0; }
+.lead {
+  color: var(--muted);
+  font-size: clamp(16px,2vw,19px);
+  line-height: 1.65;
+  max-width: 540px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.btn {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 13px 18px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .04em;
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accentInk);
+}
+.hero-art {
+  position: relative;
+  min-height: 390px;
+  border: 1px solid #34383c;
+  border-radius: 8px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 58% 42%, #25292d, transparent 53%),
+    linear-gradient(145deg,#141618,#08090a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  box-shadow: inset 0 0 70px #ffffff05, 0 24px 70px #0005;
+}
+.hero-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(120deg,transparent 25%,#ffffff08 48%,transparent 68%);
+  transform: translateX(-100%);
+  transition: transform .9s ease;
+}
+.hero-art:hover::after { transform: translateX(100%); }
+.hero-art:before {
+  content: "SF155";
+  position: absolute;
+  font-weight: 1000;
+  font-size: clamp(110px,20vw,230px);
+  letter-spacing: -.1em;
+  color: #ffffff08;
+  transform: rotate(-90deg);
+  right: -10px;
+  top: 85px;
+}
+.bike {
+  position: relative;
+  width: 100%;
+  max-width: 530px;
+  padding: 18px;
+  filter: grayscale(.72) contrast(1.08) drop-shadow(0 24px 16px #0009);
+  animation: float 5s ease-in-out infinite;
+}
+.bike svg { width: 100%; height: auto; }
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  object-fit: contain;
+  padding: 22px;
+  filter: grayscale(.35) contrast(1.05);
+  transition: transform .8s cubic-bezier(.2,.7,.2,1),
+    filter .8s ease;
+}
+.hero-art:hover .hero-photo {
+  transform: scale(1.045);
+  filter: grayscale(.08) contrast(1.08);
+}
+.art-note {
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0) }
+  50% { transform: translateY(-8px) }
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 16px;
+}
+.stat strong {
+  display: block;
+  font-size: 19px;
+  letter-spacing: -.04em;
+}
+.stat span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+section { padding: 68px 0; border-top: 1px solid var(--line); }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+.kicker {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: clamp(30px,4.5vw,48px);
+  line-height: 1;
+  letter-spacing: -.06em;
+  margin: 12px 0 0;
+}
+.section-desc {
+  color: var(--muted);
+  max-width: 410px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
+}
+.card {
+  background: linear-gradient(145deg,#141618,#0d0f10);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 23px;
+  min-height: 190px;
+}
+.num {
+  color: #c6cbd0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+.card h3 {
+  margin: 24px 0 9px;
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+}
+.feature-card { padding: 0; overflow: hidden; }
+.feature-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+  filter: grayscale(.35) contrast(1.05);
+}
+.cards.feature-gallery { grid-template-columns: repeat(3,1fr); }
+.feature-copy { padding: 21px; }
+.feature-copy h3 { margin: 14px 0 9px; }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 26px;
+}
+.panel h3 {
+  font-size: 22px;
+  letter-spacing: -.04em;
+  margin: 0 0 12px;
+}
+.panel p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: grid;
+  gap: 12px;
+}
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tick {
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: var(--accentInk);
+  font-size: 12px;
+  font-weight: 1000;
+}
+.price-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 16px;
+}
+.price-card {
+  background: linear-gradient(145deg,#d8dcdf,#aeb4ba);
+  color: var(--accentInk);
+  border-radius: 6px;
+  padding: 28px;
+}
+.price-card .small {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-weight: 900;
+}
+.price-card h3 {
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -.06em;
+  margin: 18px 0 12px;
+}
+.price-card p { font-size: 13px; line-height: 1.6; }
+.price-card .btn {
+  background: var(--accentInk);
+  color: #fff;
+  border-color: var(--accentInk);
+  margin-top: 10px;
+}
+.budget {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 24px;
+}
+.budget label {
+  font-size: 12px;
+  color: var(--muted);
+  display: block;
+  margin: 14px 0 7px;
+}
+.budget input, .budget select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px;
+  font: inherit;
+  font-size: 15px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.result {
+  background: var(--panel2);
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 15px;
+}
+.result strong {
+  font-size: 24px;
+  letter-spacing: -.04em;
+  display: block;
+}
+.result span { color: var(--muted); font-size: 12px; }
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+}
+.spec {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 17px;
+}
+.spec strong {
+  display: block;
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+.spec span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 5px;
+}
+.swatches { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  font-size: 12px;
+}
+.dot { width: 25px; height: 25px; border-radius: 50%; border: 1px solid #8888; }
+.finance-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.finance-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+.finance-result .result { margin-top: 0; }
+.finance-result strong { font-size: 21px; }
+.source-link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.note { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.promise {
+  background: linear-gradient(145deg,#171a1d,#0c0e0f);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: clamp(24px,5vw,48px);
+  display: grid;
+  grid-template-columns: 1fr .8fr;
+  gap: 28px;
+  align-items: center;
+}
+.promise h2 { max-width: 570px; }
+.promise blockquote {
+  margin: 0;
+  font-size: clamp(18px,2.4vw,25px);
+  line-height: 1.45;
+  letter-spacing: -.03em;
+}
+.promise cite {
+  display: block;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+.footer {
+  padding: 32px 24px 44px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+.back-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ffffff2a;
+  border-radius: 50%;
+  background: rgba(16,18,20,.88);
+  color: var(--ink);
+  font: 700 21px/1 system-ui, sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px #0006;
+  transition: opacity .25s ease, visibility .25s ease,
+    transform .25s ease, background .25s ease, border-color .25s ease;
+}
+.back-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-top:hover, .back-top:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accentInk);
+}
+@media(max-width:900px) {
+  .cards.feature-gallery { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:760px) {
+  .hero { grid-template-columns: 1fr; padding-top: 28px; padding-bottom: 48px; }
+  .hero-art { min-height: 280px; }
+  .hero-photo { min-height: 280px; padding: 12px; }
+  .cards { grid-template-columns: 1fr; }
+  .cards.feature-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .split, .price-grid, .promise { grid-template-columns: 1fr; }
+  .section-head { display: block; }
+  .section-desc { margin-top: 16px; }
+  .stats { gap: 7px; }
+  .stat { padding: 12px; }
+  .stat strong { font-size: 16px; }
+  .nav { padding: 12px 18px; }
+  .nav.scrolled { padding: 8px 18px; }
+  .nav a { margin-left: 2px; padding: 8px 7px; font-size: 12px; }
+  .nav-links a:first-child { display: none; }
+  .spec-grid { grid-template-columns: repeat(2,1fr); }
+  .finance-controls, .finance-result { grid-template-columns: 1fr; }
+  .back-top { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto; }
+  .bike { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-art::after { display: none; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="nav">
+  <div class="brand"><span class="mark">SF</span><span>THE GIXXER SF 155 CASE</span></div>
+  <div class="nav-links">
+    <a href="#bike">The bike</a>
+    <a href="#budget">Budget</a>
+    <a href="#promise">My promise</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <div class="eyebrow"><span class="pip"></span> A little message for you Ma ❤️</div>
+    <h1>Ma, this is the one<br><span>I really want po.</span></h1>
+    <p class="lead">Thank you for considering getting me a motorcycle, Ma. I know you told me to be patient, and I will. I just wanted to show you why the Suzuki GIXXER SF 155 is the bike I hope we can choose—the sporty look I love, the features I've researched, and the responsibility I know comes with it.</p>
+    <div class="actions">
+      <a class="btn primary" href="#why">Why this bike →</a>
+      <a class="btn" href="#budget">Calculate the real cost</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>155 cc</strong><span>Fuel-injected, air-cooled engine</span></div>
+      <div class="stat"><strong>₱116,900</strong><span>Suzuki Philippines listed SRP; confirm with dealer</span></div>
+      <div class="stat"><strong>Safety first</strong><span>A manageable class isn't a guarantee of safety</span></div>
+    </div>
+  </div>
+  <div class="hero-art" aria-label="Suzuki GIXXER SF 155 motorcycle photo">
+    <div class="bike">
+      <img class="hero-photo" src="images/gixxer-front.jpg" alt="Suzuki GIXXER SF 155 full side profile">
+    </div>
+    <div class="art-note"><span>Sportbike styling</span><span>Product photo</span></div>
+  </div>
+</div>
+
+<section id="bike">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">01 / Meet the machine</div><h2>Suzuki GIXXER SF 155</h2></div>
+    <p class="section-desc">Suzuki Philippines describes it as a sport-touring bike: full fairings and sporty styling, with everyday usability in mind. Specs below are from the manufacturer's published page.</p>
+  </div>
+  <div class="spec-grid">
+    <div class="spec"><strong>155 cc</strong><span>Single-cylinder, SOHC, 2-valve engine</span></div>
+    <div class="spec"><strong>10.4 kW</strong><span>Maximum power at 8,000 rpm</span></div>
+    <div class="spec"><strong>14.0 Nm</strong><span>Maximum torque at 6,000 rpm</span></div>
+    <div class="spec"><strong>5-speed</strong><span>Constant-mesh manual transmission</span></div>
+    <div class="spec"><strong>Fuel injection</strong><span>Air-cooled; electric start</span></div>
+    <div class="spec"><strong>146 kg</strong><span>Published curb mass</span></div>
+    <div class="spec"><strong>795 mm</strong><span>Seat height</span></div>
+    <div class="spec"><strong>12 L</strong><span>Fuel tank capacity</span></div>
+    <div class="spec"><strong>Disc / disc</strong><span>Front and rear disc brakes</span></div>
+    <div class="spec"><strong>LED</strong><span>Headlight and tail light</span></div>
+    <div class="spec"><strong>Digital</strong><span>Full digital instrument panel</span></div>
+    <div class="spec"><strong>50.2 km/L</strong><span>Manufacturer WMTC figure; real use varies</span></div>
+  </div>
+  <h3 style="margin:28px 0 8px">Color options listed by Suzuki Philippines</h3>
+  <p class="section-desc">Color and stock can vary by dealer and area. Let's confirm which finish is actually available before choosing.</p>
+  <div class="swatches">
+    <div class="swatch"><span class="dot" style="background:linear-gradient(135deg,#e9e9e5 0 45%,#2674b9 46% 70%,#e9e9e5 71%)"></span>Pearl Glacier White / Metallic Triton Blue</div>
+    <div class="swatch"><span class="dot" style="background:linear-gradient(135deg,#101214,#41474c)"></span>Glass Sparkle Black</div>
+    <div class="swatch"><span class="dot" style="background:linear-gradient(135deg,#a10f24,#e43d4b)"></span>Pearl Mira Red*</div>
+  </div>
+  <p class="note">*Suzuki's main product page also lists Pearl Mira Red and Metallic Triton Blue; a separate recent Suzuki article describes two finishes. Confirm current model-year color availability with the dealer. <a class="source-link" href="https://mc.suzuki.com.ph/motorcycles/backbone/gixxer-sf155/" target="_blank" rel="noreferrer">Official Suzuki specs and colors ↗</a></p>
+</div>
+</section>
+
+<section id="why">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">02 / The reasons</div><h2>Why the GIXXER SF 155?</h2></div>
+    <p class="section-desc">The point isn't that it's perfect. It's that it balances the things I care about—sporty looks, everyday practicality, a known Japanese manufacturer, and a price I can plan around—without pretending any motorcycle is risk-free.</p>
+  </div>
+  <div class="cards feature-gallery">
+    <article class="card feature-card"><img src="images/gixxer-headlight.jpg" alt="GIXXER SF 155 LED headlight close-up" loading="lazy"><div class="feature-copy"><div class="num">01 — LIGHTING</div><h3>LED headlight</h3><p>Sharp front styling with LED lighting. Confirm the exact features on the model year available from the dealer.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-dashboard.jpg" alt="GIXXER SF 155 digital instrument panel" loading="lazy"><div class="feature-copy"><div class="num">02 — COCKPIT</div><h3>Digital dashboard</h3><p>A clean digital instrument panel that gives the cockpit a modern, sporty feel.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-front-brake.jpg" alt="GIXXER SF 155 front disc brake" loading="lazy"><div class="feature-copy"><div class="num">03 — BRAKING</div><h3>Front disc brake</h3><p>Disc braking hardware up front. Braking performance still depends on tires, maintenance, road conditions, and rider skill.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-rear-brake.jpg" alt="GIXXER SF 155 rear disc brake" loading="lazy"><div class="feature-copy"><div class="num">04 — BRAKING</div><h3>Rear disc brake</h3><p>A rear disc brake complements the front setup. We should verify the exact braking specification for the unit being considered.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-engine.jpg" alt="GIXXER SF 155 engine close-up" loading="lazy"><div class="feature-copy"><div class="num">05 — ENGINE</div><h3>155 cc fuel-injected engine</h3><p>A single-cylinder, air-cooled engine with Suzuki Eco Performance technology, designed for everyday riding.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-suspension.jpg" alt="GIXXER SF 155 rear suspension close-up" loading="lazy"><div class="feature-copy"><div class="num">06 — COMFORT</div><h3>Rear suspension</h3><p>Suspension is part of everyday comfort and control. Set-up and road conditions matter just as much as the hardware.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-exhaust.jpg" alt="GIXXER SF 155 exhaust close-up" loading="lazy"><div class="feature-copy"><div class="num">07 — EXHAUST</div><h3>Exhaust design</h3><p>A closer look at the exhaust and its placement along the bike's sporty side profile.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-taillight.jpg" alt="GIXXER SF 155 rear tail light" loading="lazy"><div class="feature-copy"><div class="num">08 — REAR LIGHTING</div><h3>LED tail light</h3><p>The rear lighting adds to the bike's sharp styling and helps make the bike visible to traffic behind.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-cockpit.jpg" alt="GIXXER SF 155 rider cockpit and handlebars" loading="lazy"><div class="feature-copy"><div class="num">09 — RIDER CONTROLS</div><h3>Cockpit and controls</h3><p>A look at the handlebar area and the controls the rider uses on every trip.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-seat.jpg" alt="GIXXER SF 155 seat close-up" loading="lazy"><div class="feature-copy"><div class="num">10 — SEATING</div><h3>Seat and riding position</h3><p>Seat shape and riding position are worth checking in person for comfort and reach.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-wheel.jpg" alt="GIXXER SF 155 wheel and tire close-up" loading="lazy"><div class="feature-copy"><div class="num">11 — WHEELS</div><h3>Wheels and tires</h3><p>Tires are a major part of grip and control, so their condition and correct pressure matter.</p></div></article>
+    <article class="card feature-card"><img src="images/gixxer-side.jpg" alt="GIXXER SF 155 complete side profile" loading="lazy"><div class="feature-copy"><div class="num">12 — FULL PROFILE</div><h3>Full-fairing sportbike design</h3><p>The overall profile is the main reason this model stands out to me: sporty, compact, and purposeful.</p></div></article>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">02 / Grown-up details</div><h2>Safety isn't optional.</h2></div>
+    <p class="section-desc">A sportbike is a serious responsibility. The plan has to be about more than the looks or the excitement.</p>
+  </div>
+  <div class="split">
+    <div class="panel">
+      <h3>Before riding</h3>
+      <p>I'd rather wait than ride unprepared. These are part of the purchase plan, not afterthoughts.</p>
+      <ul class="checklist">
+        <li><span class="tick">✓</span><span>A properly fitted, certified full-face helmet and suitable protective riding gear.</span></li>
+        <li><span class="tick">✓</span><span>Complete the required licensing steps and follow Philippine road rules and permit restrictions.</span></li>
+        <li><span class="tick">✓</span><span>Practice and training before carrying passengers or riding in difficult conditions.</span></li>
+        <li><span class="tick">✓</span><span>Agree on family rules for routes, weather, check-ins, and when not to ride.</span></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Before paying</h3>
+      <p>No rushing into a deal just because a listing looks good.</p>
+      <ul class="checklist">
+        <li><span class="tick">✓</span><span>Get a written quote from an authorized dealer for the exact model and model year.</span></li>
+        <li><span class="tick">✓</span><span>Confirm whether the unit is available brand-new and what the advertised price includes.</span></li>
+        <li><span class="tick">✓</span><span>Ask about warranty, service schedule, parts, and expected maintenance costs.</span></li>
+        <li><span class="tick">✓</span><span>Inspect documents and make sure registration and ownership paperwork are legitimate.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="budget">
+<div class="wrap">
+  <div class="section-head">
+    <div><div class="kicker">03 / The numbers</div><h2>Full payment or installments?</h2></div>
+    <p class="section-desc">Compare full payment with monthly scenarios. Estimates are illustrative only; actual financing terms, fees, insurance, and eligibility must be confirmed with the dealer and lender.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="small">Budget target</div>
+      <h3>₱100k–₱130k</h3>
+      <p>This is my target range for a brand-new Japanese sportbike. The current R15 price, availability, and final fees must be confirmed with a Philippine dealer.</p>
+      <a class="btn" href="#promise">The promise →</a>
+    </div>
+    <div class="price-card">
+      <div class="small">Manufacturer listed SRP</div>
+      <h3>₱116,900</h3>
+      <p>Suzuki Philippines lists this suggested retail price, subject to each dealer. Request a written all-in quotation and confirm stock, color, model year, warranty, and registration inclusions.</p>
+      <a class="btn" href="https://mc.suzuki.com.ph/motorcycles/backbone/gixxer-sf155/" target="_blank" rel="noreferrer">Official Suzuki page ↗</a>
+    </div>
+    <div class="budget">
+      <h3>Build your family's estimate</h3>
+      <div class="finance-controls">
+        <div><label for="bikePrice">Quoted bike price (₱)</label><input id="bikePrice" type="number" min="0" step="100" value="116900"></div>
+        <div><label for="fees">Fees / registration (₱)</label><input id="fees" type="number" min="0" step="100" value="0"></div>
+        <div><label for="gear">Helmet + protective gear (₱)</label><input id="gear" type="number" min="0" step="100" value="10000"></div>
+        <div><label for="buffer">Maintenance / emergency buffer (₱)</label><input id="buffer" type="number" min="0" step="100" value="5000"></div>
+        <div><label for="payment">Payment method</label><select id="payment"><option value="cash">Full payment</option><option value="installment">Monthly installments (estimate)</option></select></div>
+        <div><label for="downPercent">Down payment</label><select id="downPercent"><option value="10">10%</option><option value="20" selected>20%</option><option value="30">30%</option><option value="40">40%</option><option value="50">50%</option></select></div>
+        <div><label for="months">Installment term</label><select id="months"><option value="12">12 months</option><option value="24" selected>24 months</option><option value="36">36 months</option></select></div>
+        <div><label for="rate">Flat interest per year (estimate %)</label><input id="rate" type="number" min="0" max="40" step="0.5" value="10"></div>
+      </div>
+      <div class="finance-result">
+        <div class="result"><span>Estimated upfront amount</span><strong id="upfront">₱131,900</strong></div>
+        <div class="result"><span>Estimated monthly payment</span><strong id="monthly">—</strong></div>
+        <div class="result"><span>Estimated total paid for bike</span><strong id="bikeTotal">₱116,900</strong></div>
+        <div class="result"><span>Estimated overall starting cost</span><strong id="total">₱131,900</strong></div>
+      </div>
+      <span id="status" class="note">Sample estimate only; not a financing offer.</span>
+      <p class="note">Cash estimate = bike + fees + gear + buffer. Installment upfront = down payment + fees + gear + buffer. Monthly estimate = financed amount plus simple flat interest over the term, divided by months. Ask for the official disclosure of total loan cost before signing.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="promise">
+<div class="wrap">
+  <div class="promise">
+    <div>
+      <div class="kicker">04 / My promise</div>
+      <h2>I want to earn your trust, not just get the keys.</h2>
+    </div>
+    <div>
+      <blockquote>“I know a 155 cc motorcycle is still capable of serious injury. I won't use its size as proof that I'm safe. I'll earn permission through training, patience, legal compliance, protective gear, and consistent responsibility.”</blockquote>
+      <cite>— The deal I'd like to make with Mom</cite>
+      <ul class="checklist">
+        <li><span class="tick">✓</span><span>First, confirm my legal eligibility and permit restrictions with LTO. At 16, I must not assume I can ride independently; I will follow the exact rules for my age and permit.</span></li>
+        <li><span class="tick">✓</span><span>Wear a properly fitted, certified helmet and protective gear every ride—no exceptions.</span></li>
+        <li><span class="tick">✓</span><span>No speeding, racing, stunts, phone use, riding impaired, or riding to impress anyone.</span></li>
+        <li><span class="tick">✓</span><span>Follow the service schedule, check tires/brakes/lights/chain, track fuel and maintenance, and report problems immediately.</span></li>
+        <li><span class="tick">✓</span><span>Agree on routes, check-ins, weather limits, passenger rules, and a family budget before purchase.</span></li>
+        <li><span class="tick">✓</span><span>Keep studying and make sure the bike supports my responsibilities rather than distracting from them.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="thank-you">
+<div class="wrap">
+  <div class="panel">
+    <div class="kicker">A message from me to you</div>
+    <h2>Thank you for even considering it, Ma.</h2>
+    <p style="margin-top:18px">I know a motorcycle is a big decision, not just something cool to have. It comes with costs, safety risks, rules, and responsibilities. I really appreciate you taking the time to look into it for me, and I don't want you to feel pressured or rushed.</p>
+    <p style="margin-top:14px">If the GIXXER SF 155 is possible for us, it's the one I'd be happiest with because I genuinely love its design and sporty look. But I understand that we still have to consider the budget, the timing, and what's safest and most sensible for our family.</p>
+    <p style="margin-top:14px">I promise I'll respect the rules we agree on, take training and protective gear seriously, keep up with my studies, and never treat your trust like something I can take for granted. Thank you for listening to me and for considering something that means a lot to me po. ❤️</p>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+  Made with love, research, and GIXXER excitement.<br>
+  Specifications and SRP reference Suzuki Motorcycles Philippines; SRP is subject to each dealer. Confirm exact model year, color availability, warranty, fees, and on-road price in writing. No motorcycle can be described as risk-free or guaranteed safe for a beginner. Check current LTO age, licensing, and student-permit restrictions before riding.
+</footer>
+
+<button class="back-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+</div>
+
+<script>
+const fields = ['bikePrice','fees','gear','buffer','rate'];
+
+const peso = n => new Intl.NumberFormat('en-PH', {
+  style: 'currency',
+  currency: 'PHP',
+  maximumFractionDigits: 0
+}).format(n);
+
+function val(id) {
+  return Math.max(0, Number(document.getElementById(id).value) || 0);
+}
+
+function updateTotal() {
+  const bike = val('bikePrice');
+  const fees = val('fees');
+  const gear = val('gear');
+  const buffer = val('buffer');
+  const months = Number(document.getElementById('months').value);
+  const downPct = Number(document.getElementById('downPercent').value) / 100;
+  const rate = val('rate') / 100;
+  const extras = fees + gear + buffer;
+  const financed = Math.max(0, bike * (1 - downPct));
+  const interest = financed * rate * (months / 12);
+  const monthly = (financed + interest) / months;
+  const installment = document.getElementById('payment').value === 'installment';
+
+  document.getElementById('upfront').textContent =
+    peso((installment ? bike * downPct : bike) + extras);
+  document.getElementById('monthly').textContent =
+    installment ? peso(monthly) + '/mo' : 'No monthly payment';
+  document.getElementById('bikeTotal').textContent =
+    peso(installment ? bike * downPct + financed + interest : bike);
+  document.getElementById('total').textContent =
+    peso((installment ? bike * downPct + financed + interest : bike) + extras);
+  document.getElementById('status').textContent = installment
+    ? 'Illustrative flat-interest estimate only. Dealer fees, insurance, chattel mortgage and lender terms may change the total.'
+    : 'Full-payment estimate with no loan interest. Replace sample entries with a written dealer quote.';
+
+  document.getElementById('downPercent').disabled = !installment;
+  document.getElementById('months').disabled = !installment;
+  document.getElementById('rate').disabled = !installment;
+}
+
+fields.forEach(id =>
+  document.getElementById(id).addEventListener('input', updateTotal)
+);
+['payment','downPercent','months'].forEach(id =>
+  document.getElementById(id).addEventListener('change', updateTotal)
+);
+updateTotal();
+
+// Scroll-aware navigation, reading progress, and reveal effects.
+const navLinks = [...document.querySelectorAll('.nav-links a')];
+const navTargets = navLinks
+  .map(link => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
+
+function updateScrollProgress() {
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  document.documentElement.style.setProperty(
+    '--scroll-progress',
+    maxScroll > 0 ? String(window.scrollY / maxScroll) : '0'
+  );
+  document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 36);
+  document.querySelector('.back-top').classList.toggle('visible', window.scrollY > 420);
+}
+
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
+updateScrollProgress();
+
+document.querySelector('.back-top').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth'
+  });
+});
+
+if ('IntersectionObserver' in window) {
+  const activeObserver = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (visible) {
+      navLinks.forEach(link =>
+        link.classList.toggle(
+          'active',
+          link.getAttribute('href') === '#' + visible.target.id
+        )
+      );
+    }
+  }, {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: [0, .15, .4]
+  });
+
+  navTargets.forEach(target => activeObserver.observe(target));
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+
+  document.querySelectorAll(
+    'section .section-head, section .card, section .panel, section .spec, section .stat, section .price-card, section .promise'
+  ).forEach((element, index) => {
+    element.classList.add('reveal');
+    element.style.transitionDelay = (index % 4) * 70 + 'ms';
+    revealObserver.observe(element);
+  });
+} else {
+  document.querySelectorAll('.reveal').forEach(element =>
+    element.classList.add('is-visible')
+  );
+}
+</script>
+</body>
+</html>
